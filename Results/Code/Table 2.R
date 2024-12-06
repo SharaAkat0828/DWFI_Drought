@@ -39,6 +39,7 @@ rm(list = ls())
 
 # setting USDA-NASS key
 usdarnass::nass_set_key(key = "79F68508-887F-3423-A3EE-F60AB7DFB3AE")
+setwd("/Users/sharaakat/Dropbox/akat_shara/DWFI_drought/GitHub")
 
 #**********************************************************************************************************************************************
 ## Retrieving PRISM data: “ppt” (precipitation), “tmean” (mean temperature), “tmin” (minimum temperature), and “tmax” (maximum temperature) 
@@ -167,7 +168,7 @@ usdarnass::nass_set_key(key = "79F68508-887F-3423-A3EE-F60AB7DFB3AE")
 ## Drought and Weather DATA
 #**********************************************************************************************************************************************
 
-drought_final <- readRDS("/Users/sharaakat/Dropbox/akat_shara/DWFI_drought/data/SPEI_final.rds")
+drought_final <- readRDS("/Results/Data/SPEI_final.rds")
 
 growing_season_data <- drought_final %>%
   filter(month >= 3 & month <= 10)  # Select only March to October
@@ -210,7 +211,7 @@ state_names <- c(
 )
 
 # All hat stocks, 1000 tones
-hay_all_stocks_1000t <- readxl::read_xlsx("/Users/sharaakat/Dropbox/akat_shara/DWFI_drought/data/StateHaySupplies.xlsx", sheet = 2, skip = 2)
+hay_all_stocks_1000t <- readxl::read_xlsx("/Results/Data/StateHaySupplies.xlsx", sheet = 2, skip = 2)
 
 hay_all_stocks_1000t_2 <- pivot_longer(hay_all_stocks_1000t, cols = -year, names_to = "state", values_to = "hay_stock_1000t") %>% 
   mutate(state = state_names[state])
@@ -232,7 +233,7 @@ hay_all_stocks_1000t_national <- hay_all_stocks_1000t_3 %>%
 #**********************************************************************************************************************************************
 
 # GET stocking rate data
-SR_data <- readRDS("/Users/sharaakat/Dropbox/akat_shara/DWFI_drought/manuscript/Review of Drought Paper/Results/Data/SR_data.rds")
+SR_data <- readRDS("/Results/Data/SR_data.rds")
 joined_drought_hay <- left_join(yearly_drought_data, hay_all_stocks_1000t_national, by = c("year")) 
 
 regression_data <- left_join(SR_data, joined_drought_hay, by = c("year", "state", "county")) %>% 
