@@ -39,6 +39,7 @@ rm(list = ls())
 
 # setting USDA-NASS key
 usdarnass::nass_set_key(key = "79F68508-887F-3423-A3EE-F60AB7DFB3AE")
+setwd("/Users/sharaakat/Dropbox/akat_shara/DWFI_drought/GitHub")
 
 #**********************************************************************************************************************************************
 ## Pastureland DATA
@@ -56,7 +57,7 @@ pasture_land_total <- rename(pasture_land_total, pastureland_all_types = Value)
 
 
 # PASTURE LAND - from PDFs
-pasture_data_PDF <- readxl::read_xlsx('/Users/sharaakat/Dropbox/akat_shara/DWFI_drought/data/pasture_land/pasture_data_FINAL.xlsx')
+pasture_data_PDF <- readxl::read_xlsx('/Data/Data/pasture_data_FINAL.xlsx')
 
 
 # Join all PASTURELAND data
@@ -91,7 +92,7 @@ beef_inv_total <- usdarnass::nass_data(source_desc = "CENSUS", sector_desc = "AN
 
 
 # CATTLE INV - from PDFs
-beef_inv_PDF <- readxl::read_xlsx('/Users/sharaakat/Dropbox/akat_shara/DWFI_drought/data/cattle_inv/USDA_NASS_1997present_ALL/county_beefinv.xlsx')
+beef_inv_PDF <- readxl::read_xlsx('/Data/Data/county_beefinv.xlsx')
 
 
 # Join all CATTLE INV. data
